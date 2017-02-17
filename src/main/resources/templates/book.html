@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bookstore</title>
+    </head>
+    <body>
+        <h1 data-th-inline="text">[[${#httpServletRequest.remoteUser}]]'s Book List!</h1>
+
+        <div>
+            <table style="border: 1px solid black">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Book Type</th>
+                    <th>Book Price</th>
+                </tr>                
+                <tr data-th-each="b : ${book}">
+                    <td data-th-text="${b.id}"></td>
+                    <td data-th-text="${b.title}"></td>
+                    <td data-th-text="${b.bookType}"></td>
+                    <td data-th-text="${b.bookPrice}"></td>                
+                </tr>
+                <tr>
+                <td colspan="4">Total Price: $<p th:utext="${sumPrice}" th:remove="tag"></p></td>
+                </tr>
+            </table>
+        </div>
+        
+        <hr />
+        Add Books<br />
+        <form data-th-action="@{/book/add}" name="addBookForm" method="post">
+            Title: <input type="text" name="title" /><br />
+            Book Type:<br />
+            <input type="radio" name="bookType" value="Unknown" checked="checked" /> Unknown<br />
+            <input type="radio" name="bookType" value="Novel" /> Novel<br />
+            <input type="radio" name="bookType" value="Science" /> Science<br />
+            <input type="radio" name="bookType" value="Comic" /> Comic<br />
+            
+            Price:<select name="bookPrice">
+            <option value="10">$10</option>
+            <option value="50">$50</option>
+            <option value="100">$100</option>
+            <option value="1000">$1000</option>
+            </select>
+            
+            <input type="submit" value="Add Book"/>
+        </form>
+        
+        <hr />       
+        <form data-th-action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </body>
+</html>

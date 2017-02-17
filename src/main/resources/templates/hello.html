@@ -5,6 +5,8 @@
     </head>
     <body>
         <h1 data-th-inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <p><a href="./dvds.html">click me to dvd store</a></p>
+        <p><a href="./book.html">click me to book store</a></p>
         <form data-th-action="@{/logout}" method="post">
             <input type="submit" value="Sign Out"/>
         </form>
